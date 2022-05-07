@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApplication();
 builder.Services.AddAuthorizationLocal();
 builder.Services.AddDbContext<ChatContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!));
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -27,12 +28,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
-
+app.UseEndpoints(options =>
+{
+    options.MapControllers();
+    options.MapHub<ChatHub>("/chatHub");
+});
 
 app.Run();

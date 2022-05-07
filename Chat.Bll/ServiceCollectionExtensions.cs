@@ -46,4 +46,19 @@ public static class ServiceCollectionExtensions
             Text = message.Text
         };
     }
+
+    public static IEnumerable<User> Convert(this ICollection<UserDal> users)
+    {
+        return users.Select(user => user.Convert());
+    }
+
+    public static IEnumerable<User> Convert(this IQueryable<UserDal> users)
+    {
+        return users.Select(user => user.Convert());
+    }
+
+    public static IEnumerable<Domains.Chat> Convert(this IQueryable<ChatDal> chats)
+    {
+        return chats.Select(chat => chat.Convert());
+    }
 }
