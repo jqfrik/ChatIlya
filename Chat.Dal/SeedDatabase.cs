@@ -16,6 +16,7 @@ public static class SeedDatabase
                     Login = "bigsinskill",
                     Active = false,
                     HashPassword = "",
+                    ConnectionId = ""
                 },
                 new()
                 {
@@ -23,7 +24,7 @@ public static class SeedDatabase
                     Login = "ilya13072000",
                     Active = false,
                     HashPassword = "",
-
+                    ConnectionId = ""
                 },
             });
             await context.SaveChangesAsync();

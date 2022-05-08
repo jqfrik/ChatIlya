@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Commands\Messages\AddMessage" />
       <Folder Include="Commands\Messages\RemoveMessage" />
       <Folder Include="Commands\Messages\UpdateMessage" />
       <Folder Include="Queries\Messages\GetMessagesByChatId" />
