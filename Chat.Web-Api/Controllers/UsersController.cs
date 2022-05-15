@@ -3,7 +3,10 @@ using System.Net;
 using Chat.Bll;
 using Chat.Bll.Commands.Users.AddFriend;
 using Chat.Bll.Commands.Users.Register;
+using Chat.Bll.Commands.Users.RemoveFriend;
 using Chat.Bll.Dtos;
+using Chat.Bll.Queries.Users.GetAllUsersBySearchString;
+using Chat.Bll.Queries.Users.GetFriends;
 using Chat.Bll.Queries.Users.GetUserById;
 using Chat.Dal;
 using MediatR;
@@ -33,14 +36,14 @@ public class UsersController : ControllerBase
         var registerCommandResult = await _mediator.Send(new RegisterCommand(request.Name, request.Login, request.Password, _context));
         if (registerCommandResult.Success)
         {
-            return Ok(new {Success = true});
+            return Ok(new {success = true});
         }
         return BadRequest(new { errorText = "Пользователь с таким логином уже существует" });
     }
 
     [AllowAnonymous]
-    [HttpGet("ForgotPassword")]
-    public IActionResult ForgotPassword()
+    [HttpGet("ResetPassword")]
+    public IActionResult ResetPassword()
     {
         return Ok();
     }
@@ -89,14 +92,43 @@ public class UsersController : ControllerBase
     }
 
     [Authorize]
+    [HttpPost("GetFriendsById")]
+    public async Task<IActionResult> GetFriendsById(GetFriendsByIdRequest request)
+    {
+        var getFriendsByIdResult = await _mediator.Send(new GetFriendsByIdCommand(request.Id, _context));
+
+        return Ok(getFriendsByIdResult.Users);
+    }
+
+    [HttpPost("GetAllUsersBySearchString")]
+    public async Task<IActionResult> GetAllUsersBySearchString(GetAllUsersBySearchStringRequest request)
+    {
+        var getAllUsersBySearchStringResult =
+            await _mediator.Send(
+                new GetAllUsersBySearchStringCommand(request.SearchString, request.CurrentUserId, _context));
+        return Ok(getAllUsersBySearchStringResult.Users);
+    }
+
+    [Authorize]
     [HttpPost("AddFriend")]
     public async Task<IActionResult> AddFriend(AddFriendRequest request)
     {
         var addFriendCommandResult = await _mediator.Send(new AddFriendCommand(request.FriendId, request.CurrentUserId,_context));
 
         if (addFriendCommandResult.Success)
-            return Ok(new {Success = true});
+            return Ok(new {success = true});
         return new StatusCodeResult(500);
     }
-    
+
+    [Authorize]
+    [HttpPost("RemoveFriend")]
+    public async Task<IActionResult> RemoveFriend(RemoveFriendRequest request)
+    {
+        var removeFriendCommandResult =
+            await _mediator.Send(new RemoveFriendCommand(request.CurrentUserId, request.FriendId, _context));
+        
+        if (removeFriendCommandResult.Success)
+            return Ok(new {success = true});
+        return new StatusCodeResult(500);
+    }
 }

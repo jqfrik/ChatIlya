@@ -25,7 +25,7 @@ public class ChatController : ControllerBase
         CreateChatWithFriendCommandResult commandResult = await Mediator.Send(new CreateChatWithFriendCommand(request.MainUser,request.SecondaryUser,DbContext));
 
         if (!commandResult.Success)
-            return BadRequest(new { Success = false });
-        return Ok(new { Success = true });
+            return BadRequest(new { success = false });
+        return Ok(new { success = true });
     }
 }
