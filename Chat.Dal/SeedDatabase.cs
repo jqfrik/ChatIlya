@@ -6,7 +6,7 @@ public static class SeedDatabase
 {
     public static async Task Seed(ChatContext context)
     {
-        if (!context.Users.Any() && context != null)
+        if (context != null && !context.Users.Any())
         {
             await context.Users.AddRangeAsync(new List<UserDal>()
             {

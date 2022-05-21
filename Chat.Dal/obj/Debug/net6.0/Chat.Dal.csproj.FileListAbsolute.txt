@@ -12,3 +12,17 @@ D:\Chat\Chat\Chat.Dal\obj\Debug\net6.0\refint\Chat.Dal.dll
 D:\Chat\Chat\Chat.Dal\obj\Debug\net6.0\Chat.Dal.pdb
 D:\Chat\Chat\Chat.Dal\obj\Debug\net6.0\Chat.Dal.genruntimeconfig.cache
 D:\Chat\Chat\Chat.Dal\obj\Debug\net6.0\ref\Chat.Dal.dll
+D:\ChatIlya\Chat.Dal\bin\Debug\net6.0\Chat.Dal.deps.json
+D:\ChatIlya\Chat.Dal\bin\Debug\net6.0\Chat.Dal.runtimeconfig.json
+D:\ChatIlya\Chat.Dal\bin\Debug\net6.0\Chat.Dal.dll
+D:\ChatIlya\Chat.Dal\bin\Debug\net6.0\Chat.Dal.pdb
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.csproj.AssemblyReference.cache
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.GeneratedMSBuildEditorConfig.editorconfig
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.AssemblyInfoInputs.cache
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.AssemblyInfo.cs
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.csproj.CoreCompileInputs.cache
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.dll
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\refint\Chat.Dal.dll
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.pdb
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\Chat.Dal.genruntimeconfig.cache
+D:\ChatIlya\Chat.Dal\obj\Debug\net6.0\ref\Chat.Dal.dll

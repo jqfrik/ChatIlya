@@ -1,5 +1,4 @@
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using Chat.Bll;
 using Chat.Bll.Commands.Users.AddFriend;
 using Chat.Bll.Commands.Users.Register;
@@ -97,7 +96,7 @@ public class UsersController : ControllerBase
     {
         var getFriendsByIdResult = await _mediator.Send(new GetFriendsByIdCommand(request.Id, _context));
 
-        return Ok(getFriendsByIdResult.Users);
+        return Ok(getFriendsByIdResult.Users.ToList());
     }
 
     [HttpPost("GetAllUsersBySearchString")]
@@ -113,7 +112,7 @@ public class UsersController : ControllerBase
     [HttpPost("AddFriend")]
     public async Task<IActionResult> AddFriend(AddFriendRequest request)
     {
-        var addFriendCommandResult = await _mediator.Send(new AddFriendCommand(request.FriendId, request.CurrentUserId,_context));
+        var addFriendCommandResult = await _mediator.Send(new AddFriendCommand(request.CurrentUserId, request.FriendId, _context));
 
         if (addFriendCommandResult.Success)
             return Ok(new {success = true});

@@ -14,12 +14,16 @@ builder.Services.AddApplication();
 builder.Services.AddAuthorizationLocal();
 builder.Services.AddDbContext<ChatContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!));
 builder.Services.AddSignalR();
+builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
-var chatContext = app.Services.GetService<ChatContext>();
-await SeedDatabase.Seed(chatContext!);
-
+using (var serviceScope = app.Services.CreateScope())
+{
+    var chatContext = serviceScope.ServiceProvider.GetRequiredService<ChatContext>();
+    await SeedDatabase.Seed(chatContext);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,6 +32,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(builder =>
+{
+    builder
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
+});
 app.UseRouting();
 
 app.UseAuthentication();

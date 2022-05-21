@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Chat\\Chat\\Chat.Dal\\Chat.Dal.csproj": {}
+    "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj": {}
   },
   "projects": {
-    "D:\\Chat\\Chat\\Chat.Dal\\Chat.Dal.csproj": {
+    "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Chat\\Chat\\Chat.Dal\\Chat.Dal.csproj",
+        "projectUniqueName": "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj",
         "projectName": "Chat.Dal",
-        "projectPath": "D:\\Chat\\Chat\\Chat.Dal\\Chat.Dal.csproj",
-        "packagesPath": "C:\\Users\\pslav\\.nuget\\packages\\",
-        "outputPath": "D:\\Chat\\Chat\\Chat.Dal\\obj\\",
+        "projectPath": "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj",
+        "packagesPath": "C:\\Users\\slava\\.nuget\\packages\\",
+        "outputPath": "D:\\ChatIlya\\Chat.Dal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\VisualStudioComponents\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pslav\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\slava\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/pmb-project/pmb-nuget/_packaging/pmb/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -85,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

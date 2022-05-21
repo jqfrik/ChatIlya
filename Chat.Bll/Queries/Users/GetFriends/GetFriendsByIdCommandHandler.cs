@@ -1,3 +1,4 @@
+using Chat.Bll.Domains;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
