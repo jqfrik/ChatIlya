@@ -47,12 +47,7 @@ public static class ServiceCollectionExtensions
         };
     }
 
-    public static IEnumerable<User> Convert(this ICollection<UserDal> users)
-    {
-        return users.Select(user => user.Convert());
-    }
-
-    public static IEnumerable<User> Convert(this IQueryable<UserDal> users)
+    public static IEnumerable<User> Convert(this IEnumerable<UserDal> users)
     {
         return users.Select(user => user.Convert());
     }

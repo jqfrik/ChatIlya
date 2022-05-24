@@ -1,4 +1,4 @@
-namespace Chat.Bll.Dtos;
+namespace Chat.Bll.Requests;
 
 public class GetUserByIdRequest
 {

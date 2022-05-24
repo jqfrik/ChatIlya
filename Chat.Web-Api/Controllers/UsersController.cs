@@ -3,11 +3,14 @@ using Chat.Bll;
 using Chat.Bll.Commands.Users.AddFriend;
 using Chat.Bll.Commands.Users.Register;
 using Chat.Bll.Commands.Users.RemoveFriend;
-using Chat.Bll.Dtos;
+using Chat.Bll.Domains;
+using Chat.Bll.Queries.Users.CheckChatWithCurrentFriend;
 using Chat.Bll.Queries.Users.GetAllUsersBySearchString;
 using Chat.Bll.Queries.Users.GetFriends;
 using Chat.Bll.Queries.Users.GetUserById;
+using Chat.Bll.Requests;
 using Chat.Dal;
+using Chat.Dal.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -99,13 +102,14 @@ public class UsersController : ControllerBase
         return Ok(getFriendsByIdResult.Users.ToList());
     }
 
+    [Authorize]
     [HttpPost("GetAllUsersBySearchString")]
-    public async Task<IActionResult> GetAllUsersBySearchString(GetAllUsersBySearchStringRequest request)
+    public async Task<List<User>> GetAllUsersBySearchString(GetAllUsersBySearchStringRequest request)
     {
         var getAllUsersBySearchStringResult =
             await _mediator.Send(
                 new GetAllUsersBySearchStringCommand(request.SearchString, request.CurrentUserId, _context));
-        return Ok(getAllUsersBySearchStringResult.Users);
+        return getAllUsersBySearchStringResult.Users;
     }
 
     [Authorize]
@@ -116,7 +120,7 @@ public class UsersController : ControllerBase
 
         if (addFriendCommandResult.Success)
             return Ok(new {success = true});
-        return new StatusCodeResult(500);
+        return BadRequest(new { errorText = "Не удалось добавить пользователя" });
     }
 
     [Authorize]
@@ -128,6 +132,8 @@ public class UsersController : ControllerBase
         
         if (removeFriendCommandResult.Success)
             return Ok(new {success = true});
-        return new StatusCodeResult(500);
+        return BadRequest(new { errorText = "Не удалось удалить пользователя" });
     }
+
+
 }

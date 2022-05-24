@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Chat.Bll;
 using Chat.Dal;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<ChatContext>(options => options.UseNpgsql(builder.
 builder.Services.AddSignalR();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 

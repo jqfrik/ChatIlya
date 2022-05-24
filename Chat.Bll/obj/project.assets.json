@@ -1150,7 +1150,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://pkgs.dev.azure.com/pmb-project/pmb-nuget/_packaging/pmb/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {

@@ -1,6 +1,6 @@
-namespace Chat.Bll.Dtos;
+namespace Chat.Bll.Requests;
 
-public class RemoveFriendRequest
+public class AddFriendRequest
 {
     public Guid CurrentUserId { get; set; }
     

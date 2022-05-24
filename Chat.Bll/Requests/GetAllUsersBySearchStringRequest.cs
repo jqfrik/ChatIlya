@@ -1,8 +1,8 @@
-namespace Chat.Bll.Dtos;
+namespace Chat.Bll.Requests;
 
 public class GetAllUsersBySearchStringRequest
 {
     public string SearchString { get; set; }
     
-    public Guid CurrentUserId { get; set; }
+    public string CurrentUserId { get; set; }
 }
