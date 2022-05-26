@@ -8,7 +8,7 @@ public class Chat
     
     public string PhotoUrl { get; set; }
     
-    public ICollection<User> Users { get; set; }
+    public ICollection<User>? Users { get; set; }
     
     public ICollection<Message> Messages { get; set; }
 }

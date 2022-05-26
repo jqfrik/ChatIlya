@@ -31,9 +31,9 @@ public static class ServiceCollectionExtensions
         {
             Id = chat.Id,
             Messages = chat.Messages.Select(x => x.Convert()).ToList(),
-            Title = chat.Title,
+            Title = chat?.Title,
             Users = chat.Users.Select(x => x.Convert()).ToList(),
-            PhotoUrl = chat.PhotoUrl
+            PhotoUrl = chat!.PhotoUrl
         };
     }
     public static Message Convert(this MessageDal message)

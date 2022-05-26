@@ -17,10 +17,11 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
             if (user == null || secondaryUser == null)
                 return new CreateChatWithFriendCommandResult()
                 {
-                    Success = false
+                    ChatId = Guid.Empty
                 };
             var chat = new ChatDal()
             {
+                Id = Guid.NewGuid(),
                 Users = new List<UserDal>()
                 {
                     user,
@@ -33,14 +34,14 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
 
             return new CreateChatWithFriendCommandResult()
             {
-                Success = true
+                ChatId = chat.Id.Value
             };
         }
         catch (Exception ex)
         {
             return new CreateChatWithFriendCommandResult()
             {
-                Success = false
+                ChatId = Guid.Empty
             };
         }
     }
