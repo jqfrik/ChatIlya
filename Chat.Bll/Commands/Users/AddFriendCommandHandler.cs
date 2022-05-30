@@ -1,8 +1,14 @@
+using Chat.Dal;
 using MediatR;
 
-namespace Chat.Bll.Commands.Users.AddFriend;
+namespace Chat.Bll.Commands.Users;
 
-public class AddCommandHandler : IRequestHandler<AddFriendCommand,AddFriendCommandResult>
+public record AddFriendCommand
+    (Guid CurrentUserId, Guid FriendId, ChatContext Context) : IRequest<AddFriendCommandResult>;
+
+public record AddFriendCommandResult(bool Success);
+
+internal sealed class AddFriendCommandHandler : IRequestHandler<AddFriendCommand,AddFriendCommandResult>
 {
     public async Task<AddFriendCommandResult> Handle(AddFriendCommand request, CancellationToken cancellationToken)
     {
@@ -10,16 +16,10 @@ public class AddCommandHandler : IRequestHandler<AddFriendCommand,AddFriendComma
         var friend = request.Context.Users.FirstOrDefault(x => x.Id == request.FriendId);
 
         if (currentUser == null || friend == null)
-            return new()
-            {
-                Success = false
-            };
-        
+            return new(false);
+
         currentUser.Users.Add(friend);
         await request.Context.SaveChangesAsync(CancellationToken.None);
-        return new AddFriendCommandResult()
-        {
-            Success = true
-        };
+        return new AddFriendCommandResult(true);
     }
 }

@@ -1,4 +1,4 @@
-using Chat.Bll.Commands.Messages.AddMessage;
+using Chat.Bll.Commands.Messages;
 using Chat.Dal;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;

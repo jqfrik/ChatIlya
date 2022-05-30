@@ -1,7 +1,13 @@
+using Chat.Dal;
 using Chat.Dal.Entities;
 using MediatR;
 
-namespace Chat.Bll.Commands.Users.Register;
+namespace Chat.Bll.Commands.Users;
+
+public record RegisterCommand
+    (string Name, string Login, string Password, ChatContext Context) : IRequest<RegisterCommandResult>;
+
+public record RegisterCommandResult(bool Success);
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand,RegisterCommandResult>
 {
@@ -9,10 +15,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand,RegisterCo
     {
         var user = request.Context.Users.FirstOrDefault(x => x.Login == request.Login);
         if (user != null)
-            return new()
-            {
-                Success = false
-            };
+            return new(false);
 
         var newUser = new UserDal()
         {
@@ -22,9 +25,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand,RegisterCo
         };
         await request.Context.Users.AddAsync(newUser,CancellationToken.None);
         await request.Context.SaveChangesAsync(CancellationToken.None);
-        return new()
-        {
-            Success = true
-        };
+        return new(true);
     }
 }

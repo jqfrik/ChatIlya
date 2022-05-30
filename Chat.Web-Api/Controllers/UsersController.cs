@@ -1,13 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using Chat.Bll;
-using Chat.Bll.Commands.Users.AddFriend;
-using Chat.Bll.Commands.Users.Register;
-using Chat.Bll.Commands.Users.RemoveFriend;
+using Chat.Bll.Commands.Users;
 using Chat.Bll.Domains;
-using Chat.Bll.Queries.Users.CheckChatWithCurrentFriend;
-using Chat.Bll.Queries.Users.GetAllUsersBySearchString;
-using Chat.Bll.Queries.Users.GetFriends;
-using Chat.Bll.Queries.Users.GetUserById;
+using Chat.Bll.Queries.Users;
 using Chat.Bll.Requests;
 using Chat.Dal;
 using Chat.Dal.Entities;
@@ -134,6 +129,4 @@ public class UsersController : ControllerBase
             return Ok(new {success = true});
         return BadRequest(new { errorText = "Не удалось удалить пользователя" });
     }
-
-
 }

@@ -3,6 +3,7 @@ using Chat.Bll;
 using Chat.Dal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NSwag.CodeGeneration.TypeScript;
 
 var builder = WebApplication.CreateBuilder(args);
 

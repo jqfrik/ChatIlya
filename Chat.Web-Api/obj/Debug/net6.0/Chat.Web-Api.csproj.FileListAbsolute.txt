@@ -98,3 +98,14 @@ D:\ChatIlya\Chat.Web-Api\obj\Debug\net6.0\refint\Chat.Web-Api.dll
 D:\ChatIlya\Chat.Web-Api\obj\Debug\net6.0\Chat.Web-Api.pdb
 D:\ChatIlya\Chat.Web-Api\obj\Debug\net6.0\Chat.Web-Api.genruntimeconfig.cache
 D:\ChatIlya\Chat.Web-Api\obj\Debug\net6.0\ref\Chat.Web-Api.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Fluid.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Namotion.Reflection.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NJsonSchema.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NJsonSchema.CodeGeneration.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NJsonSchema.CodeGeneration.TypeScript.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NSwag.CodeGeneration.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NSwag.CodeGeneration.TypeScript.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NSwag.Core.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Parlot.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\TimeZoneConverter.dll

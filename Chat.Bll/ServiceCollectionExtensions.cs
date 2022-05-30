@@ -17,11 +17,11 @@ public static class ServiceCollectionExtensions
     {
         return new User()
         {
-            Id = user.Id,
+            Id = user?.Id,
             Active = user.Active,
-            Chats = user.Chats.Select(x => x.Convert()).ToList(),
-            Name = user.Name,
-            Users = user.Users.Select(x => x.Convert()).ToList()
+            Chats = user?.Chats?.Select(x => x?.Convert())?.ToList(),
+            Name = user?.Name,
+            Users = user?.Users?.Select(x => x?.Convert())?.ToList()
         };
     }
 
@@ -29,31 +29,31 @@ public static class ServiceCollectionExtensions
     {
         return new Domains.Chat()
         {
-            Id = chat.Id,
-            Messages = chat.Messages.Select(x => x.Convert()).ToList(),
+            Id = chat?.Id,
+            Messages = chat?.Messages?.Select(x => x?.Convert())?.ToList(),
             Title = chat?.Title,
-            Users = chat.Users.Select(x => x.Convert()).ToList(),
-            PhotoUrl = chat!.PhotoUrl
+            Users = chat?.Users?.Select(x => x?.Convert())?.ToList(),
+            PhotoUrl = chat?.PhotoUrl
         };
     }
     public static Message Convert(this MessageDal message)
     {
         return new Message()
         {
-            Id = message.Id,
+            Id = message?.Id,
             Deleted = message.Deleted,
             Edited = message.Edited,
-            Text = message.Text
+            Text = message?.Text
         };
     }
 
     public static IEnumerable<User> Convert(this IEnumerable<UserDal> users)
     {
-        return users.Select(user => user.Convert());
+        return users?.Select(user => user.Convert());
     }
 
     public static IEnumerable<Domains.Chat> Convert(this IQueryable<ChatDal> chats)
     {
-        return chats.Select(chat => chat.Convert());
+        return chats?.Select(chat => chat.Convert());
     }
 }

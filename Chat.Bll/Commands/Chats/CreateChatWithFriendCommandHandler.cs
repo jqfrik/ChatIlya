@@ -1,8 +1,14 @@
+using Chat.Dal;
 using Chat.Dal.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Chat.Bll.Commands.Chats.CreateChatWithFriend;
+namespace Chat.Bll.Commands.Chats;
+
+public record CreateChatWithFriendCommand
+    (Guid MainUser, Guid SecondaryUser, ChatContext Context) : IRequest<CreateChatWithFriendCommandResult>;
+
+public record CreateChatWithFriendCommandResult(Guid ChatId);
 
 public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWithFriendCommand,CreateChatWithFriendCommandResult>
 {
@@ -15,10 +21,7 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
             var secondaryUser = users.FirstOrDefault(user => user.Id == request.SecondaryUser);
 
             if (user == null || secondaryUser == null)
-                return new CreateChatWithFriendCommandResult()
-                {
-                    ChatId = Guid.Empty
-                };
+                return new CreateChatWithFriendCommandResult(Guid.Empty);
             var chat = new ChatDal()
             {
                 Id = Guid.NewGuid(),
@@ -32,17 +35,11 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
 
             await request.Context.SaveChangesAsync(CancellationToken.None);
 
-            return new CreateChatWithFriendCommandResult()
-            {
-                ChatId = chat.Id.Value
-            };
+            return new CreateChatWithFriendCommandResult(chat.Id.Value);
         }
         catch (Exception ex)
         {
-            return new CreateChatWithFriendCommandResult()
-            {
-                ChatId = Guid.Empty
-            };
+            return new CreateChatWithFriendCommandResult(Guid.Empty);
         }
     }
 }

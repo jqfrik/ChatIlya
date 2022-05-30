@@ -1,6 +1,6 @@
-using Chat.Bll.Commands.Chats.CreateChatWithFriend;
-using Chat.Bll.Queries.Chats.GetChatByChatId;
-using Chat.Bll.Queries.Users.CheckChatWithCurrentFriend;
+using Chat.Bll.Commands.Chats;
+using Chat.Bll.Queries.Chats;
+using Chat.Bll.Queries.Users;
 using Chat.Bll.Requests;
 using Chat.Dal;
 using MediatR;
@@ -45,7 +45,8 @@ public class ChatController : ControllerBase
     [HttpGet("GetChatById/{chatId}")]
     public async Task<IActionResult> GetChatById([FromRoute]string chatId)
     {
-        var getChatByIdCommandResult = await _mediator.Send(new GetChatByChatIdCommand(chatId, _context));
+        var currentUserId = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "GUID")?.Value;
+        var getChatByIdCommandResult = await _mediator.Send(new GetChatByChatIdCommand(chatId, currentUserId, _context));
         return Ok(new {data = getChatByIdCommandResult.Chat});
     } 
 }
