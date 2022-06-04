@@ -1,4 +1,5 @@
 using Chat.Bll.Commands.Chats;
+using Chat.Bll.MailService;
 using Chat.Bll.Queries.Chats;
 using Chat.Bll.Queries.Users;
 using Chat.Bll.Requests;
@@ -26,7 +27,7 @@ public class ChatController : ControllerBase
     [HttpPost("Create")]
     public async Task<IActionResult> CreateChat(CreateChatWithFriendRequest request)
     {
-        CreateChatWithFriendCommandResult commandResult = await _mediator.Send(new CreateChatWithFriendCommand(request.CurrentUserId,request.FriendUserId,_context));
+        CreateChatWithFriendCommandResult commandResult = await _mediator.Send(new CreateChatWithFriendCommand(request.CurrentUserId,request.FriendUserId));
         return Ok(new {data = commandResult.ChatId});
     }
     

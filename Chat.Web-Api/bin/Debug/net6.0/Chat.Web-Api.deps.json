@@ -9,6 +9,7 @@
       "Chat.Web-Api/1.0.0": {
         "dependencies": {
           "Chat.Bll": "1.0.0",
+          "Chat.Integrations": "1.0.0",
           "MediatR": "10.0.1",
           "Microsoft.EntityFrameworkCore.Design": "6.0.4",
           "NSwag.CodeGeneration.TypeScript": "13.16.0",
@@ -1157,6 +1158,7 @@
       "Chat.Bll/1.0.0": {
         "dependencies": {
           "Chat.Dal": "1.0.0",
+          "Chat.Integrations": "1.0.0",
           "MediatR": "10.0.1",
           "MediatR.Contracts": "1.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
@@ -1175,6 +1177,11 @@
         },
         "runtime": {
           "Chat.Dal.dll": {}
+        }
+      },
+      "Chat.Integrations/1.0.0": {
+        "runtime": {
+          "Chat.Integrations.dll": {}
         }
       }
     }
@@ -2059,6 +2066,11 @@
       "sha512": ""
     },
     "Chat.Dal/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chat.Integrations/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

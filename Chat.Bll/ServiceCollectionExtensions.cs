@@ -1,5 +1,6 @@
 using System.Reflection;
 using Chat.Bll.Domains;
+using Chat.Bll.MailService;
 using Chat.Dal.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
@@ -11,6 +12,7 @@ public static class ServiceCollectionExtensions
     public static void AddApplication(this IServiceCollection container)
     {
         container.AddMediatR(Assembly.GetExecutingAssembly());
+        container.AddScoped<IMailService, MailService.MailService>();
     }
 
     public static User Convert(this UserDal user)

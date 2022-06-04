@@ -109,3 +109,5 @@ D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NSwag.CodeGeneration.TypeScript.dll
 D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\NSwag.Core.dll
 D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Parlot.dll
 D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\TimeZoneConverter.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Chat.Integrations.dll
+D:\ChatIlya\Chat.Web-Api\bin\Debug\net6.0\Chat.Integrations.pdb

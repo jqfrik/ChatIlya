@@ -76,6 +76,9 @@ namespace Chat.Dal.Migrations
                     b.Property<string>("ConnectionId")
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("HashPassword")
                         .HasColumnType("text");
 

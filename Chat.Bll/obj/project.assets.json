@@ -405,6 +405,16 @@
         "runtime": {
           "bin/placeholder/Chat.Dal.dll": {}
         }
+      },
+      "Chat.Integrations/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Chat.Integrations.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chat.Integrations.dll": {}
+        }
       }
     }
   },
@@ -1112,11 +1122,17 @@
       "type": "project",
       "path": "../Chat.Dal/Chat.Dal.csproj",
       "msbuildProject": "../Chat.Dal/Chat.Dal.csproj"
+    },
+    "Chat.Integrations/1.0.0": {
+      "type": "project",
+      "path": "../Chat.Integrations/Chat.Integrations.csproj",
+      "msbuildProject": "../Chat.Integrations/Chat.Integrations.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Chat.Dal >= 1.0.0",
+      "Chat.Integrations >= 1.0.0",
       "MediatR >= 10.0.1",
       "MediatR.Contracts >= 1.0.1",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 10.0.1",
@@ -1159,6 +1175,9 @@
           "projectReferences": {
             "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj": {
               "projectPath": "D:\\ChatIlya\\Chat.Dal\\Chat.Dal.csproj"
+            },
+            "D:\\ChatIlya\\Chat.Integrations\\Chat.Integrations.csproj": {
+              "projectPath": "D:\\ChatIlya\\Chat.Integrations\\Chat.Integrations.csproj"
             }
           }
         }

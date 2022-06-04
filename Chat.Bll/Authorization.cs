@@ -21,6 +21,8 @@ public class AuthOptions
 
 public static class Authorization
 {
+    private static readonly string _alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private static readonly Random Rnd = new Random();
     public static IServiceCollection AddAuthorizationLocal(this IServiceCollection collection)
     {
         collection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -88,5 +90,17 @@ public static class Authorization
  
         // если пользователя не найдено
         return null;
+    }
+
+    public static string GenerateNewPassword(int charsCount)
+    {
+        var passwordResult = new StringBuilder();
+        for (var i = 0; i < charsCount; i++)
+        {
+            var newRandomChar = _alphabet[Rnd.Next(0, _alphabet.Length)];
+            passwordResult.Append(newRandomChar);
+        }
+
+        return passwordResult.ToString();
     }
 }

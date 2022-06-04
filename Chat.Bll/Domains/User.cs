@@ -7,6 +7,8 @@ public class User
     public string Name { get; set; }
     
     public bool Active { get; set; }
+    
+    public string? Email { get; set; }
 
     public ICollection<User> Users { get; set; }
     

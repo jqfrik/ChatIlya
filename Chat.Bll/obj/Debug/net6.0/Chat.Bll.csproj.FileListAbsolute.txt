@@ -28,3 +28,5 @@ D:\ChatIlya\Chat.Bll\obj\Debug\net6.0\Chat.Bll.dll
 D:\ChatIlya\Chat.Bll\obj\Debug\net6.0\refint\Chat.Bll.dll
 D:\ChatIlya\Chat.Bll\obj\Debug\net6.0\Chat.Bll.pdb
 D:\ChatIlya\Chat.Bll\obj\Debug\net6.0\ref\Chat.Bll.dll
+D:\ChatIlya\Chat.Bll\bin\Debug\net6.0\Chat.Integrations.dll
+D:\ChatIlya\Chat.Bll\bin\Debug\net6.0\Chat.Integrations.pdb

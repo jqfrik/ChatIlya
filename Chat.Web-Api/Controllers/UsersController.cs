@@ -5,7 +5,6 @@ using Chat.Bll.Domains;
 using Chat.Bll.Queries.Users;
 using Chat.Bll.Requests;
 using Chat.Dal;
-using Chat.Dal.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +34,20 @@ public class UsersController : ControllerBase
         {
             return Ok(new {success = true});
         }
-        return BadRequest(new { errorText = "Пользователь с таким логином уже существует" });
+        return BadRequest(new { data = "Пользователь с таким логином уже существует" });
     }
 
     [AllowAnonymous]
     [HttpGet("ResetPassword")]
-    public IActionResult ResetPassword()
+    public async Task<IActionResult> ResetPassword()
     {
-        return Ok();
+        //Нужна почта и телефон при авторизации
+        var resetPasswordCommandResult = await _mediator.Send(new ResetPasswordCommand("pslava2000@mail.ru"));
+        if (string.IsNullOrEmpty(resetPasswordCommandResult.newHashedPassword))
+        {
+            return BadRequest(new { data = "Не удалось сбросить пароль" });
+        }
+        return Ok(resetPasswordCommandResult.newHashedPassword);
     }
 
     [AllowAnonymous]

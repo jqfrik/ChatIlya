@@ -1,9 +1,8 @@
 using System.Text.Json.Serialization;
 using Chat.Bll;
 using Chat.Dal;
+using Chat.Integrations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using NSwag.CodeGeneration.TypeScript;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddControllers()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddSmsAero();
 
 var app = builder.Build();
 
