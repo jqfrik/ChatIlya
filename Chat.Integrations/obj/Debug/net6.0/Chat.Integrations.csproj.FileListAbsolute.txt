@@ -1,0 +1,16 @@
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Chat.Integrations.deps.json
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Chat.Integrations.dll
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Chat.Integrations.pdb
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\ChatIlya\Chat.Integrations\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.csproj.AssemblyReference.cache
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.GeneratedMSBuildEditorConfig.editorconfig
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.AssemblyInfoInputs.cache
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.AssemblyInfo.cs
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.csproj.CoreCompileInputs.cache
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.csproj.CopyComplete
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.dll
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\refint\Chat.Integrations.dll
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\Chat.Integrations.pdb
+D:\ChatIlya\Chat.Integrations\obj\Debug\net6.0\ref\Chat.Integrations.dll
