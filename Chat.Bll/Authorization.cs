@@ -22,6 +22,7 @@ public class AuthOptions
 public static class Authorization
 {
     private static readonly string _alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private static readonly string _symbols = "0123456789";
     private static readonly Random Rnd = new Random();
     public static IServiceCollection AddAuthorizationLocal(this IServiceCollection collection)
     {
@@ -102,5 +103,17 @@ public static class Authorization
         }
 
         return passwordResult.ToString();
+    }
+
+    public static string GenerateSmsCheck(int charsCount)
+    {
+        var smsCheckResult = new StringBuilder();
+        for (var i = 0; i < charsCount; i++)
+        {
+            var newRandomChar = _symbols[Rnd.Next(0, _symbols.Length)];
+            smsCheckResult.Append(newRandomChar);
+        }
+
+        return smsCheckResult.ToString();
     }
 }

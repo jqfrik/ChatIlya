@@ -10,6 +10,10 @@ public class UserDal
     public string? Name { get; set; }
     
     public string? Email { get; set; }
+
+    public string? TelephoneNumber { get; set; }
+
+    public string? SmsChecker { get; set; }
     
     public bool Active { get; set; } 
     

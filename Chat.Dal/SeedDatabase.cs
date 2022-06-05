@@ -16,7 +16,9 @@ public static class SeedDatabase
                     Login = "bigsinskill",
                     Active = false,
                     HashPassword = "",
-                    ConnectionId = ""
+                    ConnectionId = "",
+                    TelephoneNumber = "+79514295341",
+                    Email = "pslava2000@mail.ru"
                 },
                 new()
                 {
@@ -24,7 +26,9 @@ public static class SeedDatabase
                     Login = "ilya13072000",
                     Active = false,
                     HashPassword = "",
-                    ConnectionId = ""
+                    ConnectionId = "",
+                    TelephoneNumber = "+79040758776",
+                    Email = "ilyachernuha92@gmail.com"
                 },
             });
             await context.SaveChangesAsync();

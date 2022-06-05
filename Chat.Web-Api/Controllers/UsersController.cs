@@ -32,22 +32,35 @@ public class UsersController : ControllerBase
         var registerCommandResult = await _mediator.Send(new RegisterCommand(request.Name, request.Login, request.Password, _context));
         if (registerCommandResult.Success)
         {
-            return Ok(new {success = true});
+            return Ok(new { data = true});
         }
         return BadRequest(new { data = "Пользователь с таким логином уже существует" });
     }
 
     [AllowAnonymous]
-    [HttpGet("ResetPassword")]
-    public async Task<IActionResult> ResetPassword()
+    [HttpPost("ResetPasswordFirstStage")]
+    public async Task<IActionResult> ResetPasswordFirstStage(ResetPasswordFirstStageRequest request)
     {
         //Нужна почта и телефон при авторизации
-        var resetPasswordCommandResult = await _mediator.Send(new ResetPasswordCommand("pslava2000@mail.ru"));
+        var resetPasswordCommandResult = await _mediator.Send(new ResetPasswordFirstStageCommand(request.Email));
         if (string.IsNullOrEmpty(resetPasswordCommandResult.newHashedPassword))
         {
             return BadRequest(new { data = "Не удалось сбросить пароль" });
         }
-        return Ok(resetPasswordCommandResult.newHashedPassword);
+        return Ok(new { data = true });
+    }
+
+    [AllowAnonymous]
+    [HttpPost("ResetPasswordSecondStage")]
+    public async Task<IActionResult> ResetPasswordSecondStage(ResetPasswordSecondStageRequest request)
+    {
+        var resetPasswordSecondStageResult = await _mediator.Send(new ResetPasswordSecondStageCommand(request.Email, request.SmsChecker));
+        if (resetPasswordSecondStageResult.Success)
+        {
+            return Ok(new { data = true });
+        }
+
+        return BadRequest(new { data = false });
     }
 
     [AllowAnonymous]
@@ -57,7 +70,7 @@ public class UsersController : ControllerBase
         var identity = Authorization.GetIdentity(request.Login, request.Password, _context);
         if (identity == null)
         {
-            return BadRequest(new { errorText = "Такого пользователя не найдено" });
+            return BadRequest(new { data = "Такого пользователя не найдено" });
         }
  
         var now = DateTime.UtcNow;

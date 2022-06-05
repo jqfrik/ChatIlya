@@ -1,4 +1,4 @@
-namespace Chat.Integrations.SmsAero.Domains;
+namespace Chat.Integrations.SmsAero.Models;
 
 public class AuthResponse
 {
