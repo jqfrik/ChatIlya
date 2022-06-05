@@ -9,4 +9,6 @@ public class MessageDal
     public bool Deleted { get; set; }
     
     public bool Edited { get; set; }
+    
+    public UserDal User { get; set; }
 }

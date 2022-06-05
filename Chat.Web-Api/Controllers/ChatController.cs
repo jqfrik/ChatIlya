@@ -49,5 +49,17 @@ public class ChatController : ControllerBase
         var currentUserId = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "GUID")?.Value;
         var getChatByIdCommandResult = await _mediator.Send(new GetChatByChatIdCommand(chatId, currentUserId, _context));
         return Ok(new {data = getChatByIdCommandResult.Chat});
-    } 
+    }
+
+    [HttpPost("ArchiveChat")]
+    public async Task<IActionResult> ArchiveChat(ArchiveChatRequest request)
+    {
+        var currentUserId = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "GUID")?.Value;
+        var archiveChatCommandResult = await _mediator.Send(new ArchiveChatCommand(currentUserId,request.FriendId));
+        if (archiveChatCommandResult.bytes == null)
+        {
+            return BadRequest(new { data = "Что-то пошло не так" });
+        }
+        return File(archiveChatCommandResult.bytes,"plain/text");
+    }
 }

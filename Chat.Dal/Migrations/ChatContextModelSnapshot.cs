@@ -57,9 +57,14 @@ namespace Chat.Dal.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChatDalId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -124,6 +129,14 @@ namespace Chat.Dal.Migrations
                     b.HasOne("Chat.Dal.Entities.ChatDal", null)
                         .WithMany("Messages")
                         .HasForeignKey("ChatDalId");
+
+                    b.HasOne("Chat.Dal.Entities.UserDal", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Chat.Dal.Entities.UserDal", b =>

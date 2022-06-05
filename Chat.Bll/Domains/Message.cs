@@ -9,4 +9,6 @@ public class Message
     public bool Deleted { get; set; }
     
     public bool Edited { get; set; }
+    
+    public User User { get; set; }
 }

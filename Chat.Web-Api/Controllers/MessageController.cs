@@ -1,4 +1,10 @@
+using System.Security.Claims;
+using Chat.Bll.Commands.Messages;
 using Chat.Bll.MailService;
+using Chat.Dal;
+using Chat.Integrations.SmsAero.Models;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat.Web_Api.Controllers;
@@ -8,20 +14,13 @@ namespace Chat.Web_Api.Controllers;
 public class MessageController : ControllerBase
 {
     private IMailService _mailService { get; }
-    private IConfiguration Configuration { get; }
+    private IConfiguration _configuration { get; }
+    private IMediator _mediator { get; }
 
-    public MessageController(IMailService service, IConfiguration configuration)
+    public MessageController(IMailService service, IConfiguration configuration, IMediator mediator)
     {
         _mailService = service;
-        Configuration = configuration;
-    }
-
-    [HttpGet("SendMessage")]
-    public async Task SendMessage()
-    {
-        await _mailService.SendMail("pslava200000@yandex.ru", Configuration["EmailSettings:login"],
-            Configuration["EmailSettings:password"], Configuration["EmailSettings:securePasswordYandex"], "СЛАВЯНДР",
-            new[] { "pslava2000@mail.ru" }, "Заголовок", "Текстовое сообщение",
-            false);
+        _configuration = configuration;
+        mediator = mediator;
     }
 }
