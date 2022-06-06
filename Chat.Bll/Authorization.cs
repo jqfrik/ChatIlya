@@ -53,7 +53,7 @@ public static class Authorization
         return collection;
     }
 
-    public static string EncodePassword(string password)
+    public static string Encode(string password)
     {
         byte[] encData_byte = new byte[password.Length]; 
         encData_byte = Encoding.UTF8.GetBytes(password); 
@@ -75,7 +75,7 @@ public static class Authorization
     
     public static ClaimsIdentity GetIdentity(string login, string password,ChatContext context)
     {
-        var hashedPassword = EncodePassword(password);
+        var hashedPassword = Encode(password);
         var user = context.Users.FirstOrDefault(x => x.Login == login && x.HashPassword == hashedPassword);
         if (user != null)
         {

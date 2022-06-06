@@ -57,11 +57,12 @@ public class ChatController : ControllerBase
         return Ok(new {data = getChatByIdCommandResult.Chat});
     }
 
+    [Authorize]
     [HttpPost("ArchiveChat")]
     public async Task<IActionResult> ArchiveChat(ArchiveChatRequest request)
     {
         var currentUserId = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "GUID")?.Value;
-        var archiveChatCommandResult = await _mediator.Send(new ArchiveChatCommand(currentUserId,request.FriendId));
+        var archiveChatCommandResult = await _mediator.Send(new ArchiveChatCommand(currentUserId,request.ChatId));
         if (archiveChatCommandResult.bytes == null)
         {
             return BadRequest(new { data = "Что-то пошло не так" });
@@ -72,6 +73,13 @@ public class ChatController : ControllerBase
         fileName.Append(Guid.NewGuid().ToString().Substring(0,10));
         fileName.Append(".txt");
         return File(archiveChatCommandResult.bytes,"plain/text",fileName.ToString());
+    }
+    
+    [HttpPost("GetMessagesByChatId")]
+    public async Task<IActionResult> GetMessagesByChatId(GetMessagesByChatIdRequest request)
+    {
+        var getMessagesByChatIdResult = await _mediator.Send(new GetMessagesByChatIdCommand(request.ChatId));
+        return Ok(getMessagesByChatIdResult.Messages);
     }
 
     // [AllowAnonymous]

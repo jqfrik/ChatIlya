@@ -21,7 +21,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand,RegisterCo
         {
             Name = request.Name,
             Login = request.Login,
-            HashPassword = Authorization.EncodePassword(request.Password)
+            HashPassword = Authorization.Encode(request.Password)
         };
         await request.Context.Users.AddAsync(newUser,CancellationToken.None);
         await request.Context.SaveChangesAsync(CancellationToken.None);

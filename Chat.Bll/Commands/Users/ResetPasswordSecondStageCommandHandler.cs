@@ -34,7 +34,7 @@ internal sealed class ResetPasswordSecondStageCommandHandler : IRequestHandler<R
             var textBuilder = new StringBuilder();
             var login = Guid.NewGuid();
             var password = Authorization.GenerateNewPassword(10);
-            var hashPassword = Authorization.EncodePassword(password);
+            var hashPassword = Authorization.Encode(password);
             textBuilder.Append(string.Format("Новый Логин: {0}\n",login));
             textBuilder.Append(string.Format("Новый Пароль: {0}",password));
             user.SmsChecker = "";

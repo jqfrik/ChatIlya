@@ -59,4 +59,9 @@ public static class ServiceCollectionExtensions
     {
         return chats?.Select(chat => chat.Convert());
     }
+
+    public static IEnumerable<Message> Convert(this IEnumerable<MessageDal> messages)
+    {
+        return messages.Select(message => message.Convert());
+    }
 }
