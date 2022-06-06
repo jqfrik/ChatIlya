@@ -41,7 +41,8 @@ public class ChatHub : Hub
         var userContextId = Context.User.Claims.FirstOrDefault(cl => cl.Type == "GUID")?.Value;
         var friendDb = DbContext.Users.FirstOrDefault(user => user.Id == friendId);
 
-        AddMessageCommandResult addMessageCommandResult = await Mediator.Send(new AddMessageCommand(new Guid(userContextId!), friendDb?.Id, message,Context, Clients));
+        //Проверить как работает приведение типов
+        AddMessageCommandResult addMessageCommandResult = await Mediator.Send(new AddMessageCommand(new Guid(userContextId!), friendDb?.Id, message, Clients as IHubClients));
     }
 
     public async Task RemoveMessageClient(string messageId, string chatId)

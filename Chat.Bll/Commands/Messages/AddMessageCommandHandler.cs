@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Bll.Commands.Messages;
 
-public record AddMessageCommand(Guid? UserId, Guid? FriendId, string Message,HubCallerContext HubContext, IHubCallerClients Clients) : IRequest<AddMessageCommandResult>;
+public record AddMessageCommand(Guid? UserId, Guid? FriendId, string Message, IHubClients Clients) : IRequest<AddMessageCommandResult>;
 
 public record AddMessageCommandResult(bool Success);
 public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMessageCommandResult>
@@ -26,7 +26,7 @@ public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMes
                 .Include(x => x.Messages);
             var users = _context.Users;
             var currentUser = users.FirstOrDefault(user => user.Id == request.UserId);
-            var chat = chats.FirstOrDefault(chat => chat.Users.All(user => user.Id == request.FriendId || user.Id == request.UserId));
+            var chat = chats.FirstOrDefault(chat => chat.Users.Any(user => user.Id == request.FriendId) && chat.Users.Any(user => user.Id == request.UserId));
 
             var newMessage = new MessageDal()
             {
@@ -40,8 +40,10 @@ public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMes
 
             var friendDb = _context.Users.FirstOrDefault(user => user.Id == request.FriendId);
 
-            await request.Clients.Clients(friendDb.ConnectionId).SendAsync("getMessageClient", request.Message);
-            await request.Clients.Caller.SendAsync("sendMessageClientStatus", new { Success = true});
+            await request?.Clients?.Clients(friendDb.ConnectionId).SendAsync("getMessageClient", request.Message);
+            await request?.Clients.Client(currentUser.ConnectionId)
+                .SendAsync("sendMessageClientStatus", new { Success = true });
+            //await request?.Clients.Clients?.SendAsync("sendMessageClientStatus", new { Success = true});
 
             return new AddMessageCommandResult(true);
         }

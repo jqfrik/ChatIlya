@@ -4,6 +4,7 @@ using Chat.Bll.MailService;
 using Chat.Dal.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Chat.Bll;
 

@@ -1,5 +1,7 @@
+using System.Text;
+using Chat.Bll;
 using Chat.Bll.Commands.Chats;
-using Chat.Bll.MailService;
+using Chat.Bll.Commands.Messages;
 using Chat.Bll.Queries.Chats;
 using Chat.Bll.Queries.Users;
 using Chat.Bll.Requests;
@@ -7,6 +9,7 @@ using Chat.Dal;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Chat.Web_Api.Controllers;
 
@@ -16,11 +19,14 @@ public class ChatController : ControllerBase
 {
     private IMediator _mediator { get; }
     private ChatContext _context { get; }
+    private IHubContext<ChatHub> _chatHub { get; }
 
-    public ChatController(IMediator mediator, ChatContext dbContext)
+
+    public ChatController(IMediator mediator, ChatContext dbContext,IHubContext<ChatHub> chatHub)
     {
         _mediator = mediator;
         _context = dbContext;
+        _chatHub = chatHub;
     }
     
     [Authorize]
@@ -60,6 +66,20 @@ public class ChatController : ControllerBase
         {
             return BadRequest(new { data = "Что-то пошло не так" });
         }
-        return File(archiveChatCommandResult.bytes,"plain/text");
+
+        var fileName = new StringBuilder();
+        fileName.Append("archiveChat");
+        fileName.Append(Guid.NewGuid().ToString().Substring(0,10));
+        fileName.Append(".txt");
+        return File(archiveChatCommandResult.bytes,"plain/text",fileName.ToString());
     }
+
+    // [AllowAnonymous]
+    // [HttpGet("AddMessage")]
+    // public async Task<IActionResult> AddMessage()
+    // {
+    //     var addMessageCommandResult =
+    //         await _mediator.Send(new AddMessageCommand(new Guid("d64c734c-1a2d-4625-b2f9-b8d4db3f20a9"), new Guid("57f0538b-5785-4721-a851-8d4c7c9e2d5b"), "новое сообщение", _chatHub.Clients));
+    //     return Ok();
+    // }
 }

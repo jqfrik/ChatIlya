@@ -24,21 +24,20 @@ internal sealed class ArchiveChat : IRequestHandler<ArchiveChatCommand,ArchiveCh
         {
             var chats = Context.Chats
                 .Include(chat => chat.Users)
+                .Include(chat => chat.Messages)
                 .AsEnumerable();
             var chat = chats.FirstOrDefault(chat =>
-                chat.Users.Any(user => user.Id == new Guid("57f0538b-5785-4721-a851-8d4c7c9e2d5b"))
-                && chat.Users.Any(user => user.Id == new Guid("d64c734c-1a2d-4625-b2f9-b8d4db3f20a9")));
+                chat.Users.Any(user => user.Id == new Guid("d64c734c-1a2d-4625-b2f9-b8d4db3f20a9"))
+                && chat.Users.Any(user => user.Id == new Guid("57f0538b-5785-4721-a851-8d4c7c9e2d5b")));
             
-            //var fileStream = new MemoryStream();
             var resultText = new StringBuilder();
-            var messages = Enumerable.Range(0,10).Select( x => new MessageDal(){ Text = "context" });
-            //var messages = chat.Messages;
+            var messages = chat.Messages;
             foreach (var messageItem in messages)
             {
-                //resultText.Append(messageItem?.User.Name);
+                resultText.Append(messageItem?.User?.Name);
                 resultText.Append("\n");
                 resultText.Append(messageItem.Text);
-                resultText.Append("----------");
+                resultText.Append("----------\n");
             }
             var messagesInBytes = Encoding.UTF8.GetBytes(resultText.ToString());
             return Task.FromResult(new ArchiveChatCommandResult(messagesInBytes));
