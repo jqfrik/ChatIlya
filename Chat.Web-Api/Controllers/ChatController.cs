@@ -82,6 +82,13 @@ public class ChatController : ControllerBase
         return Ok(getMessagesByChatIdResult.Messages);
     }
 
+    [HttpGet("GetAllChatsByUserId/{userId}")]
+    public async Task<IActionResult> GetAllChatsByUserId([FromRoute] string userId)
+    {
+        var allChatsCommandResult = await _mediator.Send(new GetAllChatsByUserIdCommand(userId));
+        return Ok(allChatsCommandResult.Chats);
+    }
+
     // [AllowAnonymous]
     // [HttpGet("AddMessage")]
     // public async Task<IActionResult> AddMessage()

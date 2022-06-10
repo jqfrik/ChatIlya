@@ -5,7 +5,7 @@ using MediatR;
 namespace Chat.Bll.Commands.Users;
 
 public record RegisterCommand
-    (string Name, string Login, string Password, ChatContext Context) : IRequest<RegisterCommandResult>;
+    (string FullName, string Login, string Password, string Email, string Telephone, ChatContext Context) : IRequest<RegisterCommandResult>;
 
 public record RegisterCommandResult(bool Success);
 
@@ -19,8 +19,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand,RegisterCo
 
         var newUser = new UserDal()
         {
-            Name = request.Name,
+            Name = request.FullName,
             Login = request.Login,
+            Email = request.Email,
+            TelephoneNumber = request.Telephone,
             HashPassword = Authorization.Encode(request.Password)
         };
         await request.Context.Users.AddAsync(newUser,CancellationToken.None);

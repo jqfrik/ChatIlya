@@ -41,25 +41,22 @@ public class SmsAeroClient
 
         var result = await SendMessageRequest(new SendMessageRequest(email, authToken, telephoneNumber,
             destinationTelephone, sign, message));
-        var timer = new Stopwatch();
-        timer.Start();
-        if (result.Success)
-        {
-            while (timer.Elapsed < TimeSpan.FromMinutes(6))
-            {
-                var checkStatus = await CheckSendMessageStatus(result.Data.FirstOrDefault().Id.ToString());
-                if (checkStatus.Data.ExtendStatus == DeliveredMessageStatus)
-                {
-                    result.Data.FirstOrDefault().ExtendStatus = DeliveredMessageStatus;
-                    break;
-                }
-                await Task.Delay(OneSecond * 60);
-            }
-        }
+        // if (result.Success)
+        // {
+        //     while (timer.Elapsed < TimeSpan.FromMinutes(6))
+        //     {
+        //         var checkStatus = await CheckSendMessageStatus(result.Data.FirstOrDefault().Id.ToString());
+        //         if (checkStatus.Data.ExtendStatus == DeliveredMessageStatus)
+        //         {
+        //             result.Data.FirstOrDefault().ExtendStatus = DeliveredMessageStatus;
+        //             break;
+        //         }
+        //         await Task.Delay(OneSecond * 60);
+        //     }
+        // }
 
-        timer.Stop();
-
-        return result.Success && result.Data.FirstOrDefault().ExtendStatus == DeliveredMessageStatus;
+        //return result.Success && result.Data.FirstOrDefault().ExtendStatus == DeliveredMessageStatus;
+        return result.Success;
     }
 
     public async Task<CheckSendMessageStatus> CheckSendMessageStatus(string messageId)

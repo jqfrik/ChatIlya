@@ -6,16 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Bll.Commands.Messages;
 
-public record AddMessageCommand(Guid? UserId, Guid? FriendId, string Message, IHubClients Clients) : IRequest<AddMessageCommandResult>;
+public record AddMessageCommand(Guid? UserId, Guid? FriendId, string Message) : IRequest<AddMessageCommandResult>;
 
 public record AddMessageCommandResult(bool Success);
 public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMessageCommandResult>
 { 
     private ChatContext _context { get; }
+    private IHubContext<ChatHub> _hubContext { get; }
 
-    public AddMessageCommandHandler(ChatContext context)
+    public AddMessageCommandHandler(ChatContext context,IHubContext<ChatHub> hubContext)
     {
         _context = context;
+        _hubContext = hubContext;
     }
     public async  Task<AddMessageCommandResult> Handle(AddMessageCommand request, CancellationToken cancellationToken)
     {
@@ -40,9 +42,9 @@ public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMes
 
             var friendDb = _context.Users.FirstOrDefault(user => user.Id == request.FriendId);
 
-            await request?.Clients?.Clients(friendDb.ConnectionId).SendAsync("getMessageClient", request.Message);
-            await request?.Clients.Client(currentUser.ConnectionId)
-                .SendAsync("sendMessageClientStatus", new { Success = true });
+            await _hubContext.Clients.Client(friendDb.ConnectionId).SendAsync("sendMessageClientStatus", new { success = true ,chatId = chat.Id });
+            await _hubContext?.Clients.Client(currentUser.ConnectionId)
+                .SendAsync("sendMessageClientStatus", new { success = true ,chatId = chat.Id });
             //await request?.Clients.Clients?.SendAsync("sendMessageClientStatus", new { Success = true});
 
             return new AddMessageCommandResult(true);

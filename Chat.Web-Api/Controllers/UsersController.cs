@@ -26,10 +26,11 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
     
+    [AllowAnonymous]
     [HttpPost("Register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var registerCommandResult = await _mediator.Send(new RegisterCommand(request.Name, request.Login, request.Password, _context));
+        var registerCommandResult = await _mediator.Send(new RegisterCommand(request.FullName, request.Login, request.Password,request.Email,request.Telephone, _context));
         if (registerCommandResult.Success)
         {
             return Ok(new { data = true});

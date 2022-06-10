@@ -17,32 +17,30 @@ public class ChatHub : Hub
     }
     public override async Task OnConnectedAsync()
     {
+        // var connectionId = Context.ConnectionId;
+        // var contextName =  Context.User.Claims.FirstOrDefault(cl => cl.Type.Contains("claims/name")).Value;
+        // var contextId = Context.User.Claims.FirstOrDefault(cl => cl.Type == "GUID")?.Value;
+        // var user = DbContext.Users.FirstOrDefault(user => user.Id == new Guid(contextId));
+        // if(user.ConnectionId != connectionId)
+        //     user.ConnectionId = connectionId;
+        // await DbContext.SaveChangesAsync(CancellationToken.None);
+    }
+
+    public async Task UpdateSignalId(string userId)
+    {
         var connectionId = Context.ConnectionId;
-        var contextName =  Context.User.Claims.FirstOrDefault(cl => cl.Type.Contains("claims/name")).Value;
-        var contextId = Context.User.Claims.FirstOrDefault(cl => cl.Type == "GUID")?.Value;
-        var user = DbContext.Users.FirstOrDefault(user => user.Id == new Guid(contextId));
+        var user = DbContext.Users.FirstOrDefault(user => user.Id == new Guid(userId));
         if(user.ConnectionId != connectionId)
             user.ConnectionId = connectionId;
         await DbContext.SaveChangesAsync(CancellationToken.None);
     }
 
-    public override Task OnDisconnectedAsync(Exception? exception)
-    {
-        var connectionId = Context.ConnectionId;
-        var contextName =  Context.User.Claims.FirstOrDefault(cl => cl.Type.Contains("claims/name")).Value;
-        var contextId = Context.User.Claims.FirstOrDefault(cl => cl.Type == "GUID")?.Value;
-        return base.OnDisconnectedAsync(exception);
-    }
-
-    public async Task SendMessageClient(string message,Guid friendId)
+    public async Task SendMessageClient(string message,string userId,string friendId)
     {
         var user = Context.User;
         var connectionId = Context.ConnectionId;
-        var userContextId = Context.User.Claims.FirstOrDefault(cl => cl.Type == "GUID")?.Value;
-        var friendDb = DbContext.Users.FirstOrDefault(user => user.Id == friendId);
-
         //Проверить как работает приведение типов
-        AddMessageCommandResult addMessageCommandResult = await Mediator.Send(new AddMessageCommand(new Guid(userContextId!), friendDb?.Id, message, Clients as IHubClients));
+        AddMessageCommandResult addMessageCommandResult = await Mediator.Send(new AddMessageCommand(new Guid(userId), new Guid(friendId), message));
     }
 
     public async Task RemoveMessageClient(string messageId, string chatId)

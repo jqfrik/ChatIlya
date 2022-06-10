@@ -9,7 +9,8 @@ public record GetMessagesByChatIdCommand(string ChatId) : IRequest<GetMessagesBy
 
 public record GetMessagesByChatIdCommandResult(IEnumerable<Message> Messages);
 
-internal sealed class GetMessagesByChatId : IRequestHandler<GetMessagesByChatIdCommand,GetMessagesByChatIdCommandResult>
+internal sealed class
+    GetMessagesByChatId : IRequestHandler<GetMessagesByChatIdCommand, GetMessagesByChatIdCommandResult>
 {
     private ChatContext _context { get; }
 
@@ -17,7 +18,9 @@ internal sealed class GetMessagesByChatId : IRequestHandler<GetMessagesByChatIdC
     {
         _context = context;
     }
-    public Task<GetMessagesByChatIdCommandResult> Handle(GetMessagesByChatIdCommand request, CancellationToken cancellationToken)
+
+    public Task<GetMessagesByChatIdCommandResult> Handle(GetMessagesByChatIdCommand request,
+        CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(request.ChatId))
         {
@@ -26,6 +29,7 @@ internal sealed class GetMessagesByChatId : IRequestHandler<GetMessagesByChatIdC
 
         var chatIdGuid = new Guid(request.ChatId);
         var chats = _context.Chats
+            .Include(chat => chat.Users)
             .Include(chat => chat.Messages);
         var chat = chats.FirstOrDefault(chat => chat.Id == chatIdGuid);
         var messages = chat.Messages;

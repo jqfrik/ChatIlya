@@ -30,6 +30,7 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
                 return new CreateChatWithFriendCommandResult(Guid.Empty);
             var chat = new ChatDal()
             {
+                Title = secondaryUser.Name,
                 Id = Guid.NewGuid(),
                 Users = new List<UserDal>()
                 {
