@@ -23,11 +23,20 @@ public class CreateChatWithFriendCommandHandler : IRequestHandler<CreateChatWith
         try
         {
             var users = Context.Users.Include(x => x.Users);
+            var chats = Context.Chats.Include(x => x.Users);
             var user = users.FirstOrDefault(user => user.Id == request.MainUser);
             var secondaryUser = users.FirstOrDefault(user => user.Id == request.SecondaryUser);
 
+            var chatExists = chats.Any(chat =>
+                chat.Users.Any(user => user.Id == request.SecondaryUser) &&
+                chat.Users.Any(user => user.Id == request.MainUser));
+            if (chatExists)
+            {
+                return new CreateChatWithFriendCommandResult(Guid.Empty);
+            }
             if (user == null || secondaryUser == null)
                 return new CreateChatWithFriendCommandResult(Guid.Empty);
+            
             var chat = new ChatDal()
             {
                 Title = secondaryUser.Name,

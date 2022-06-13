@@ -37,11 +37,12 @@ internal sealed class
             .Include(x => x.Users)
             .AsEnumerable()
             .FirstOrDefault(user => user.Id == userId);
-        var changedUsers = users.Chats.AsEnumerable().Convert().Select(chat =>
+        var changedUsers = users.Chats.AsEnumerable();
+        var changedTitles = changedUsers.Select(chat =>
         {
             chat.Title = chat.Users.FirstOrDefault(x => x.Id.Value != userId)?.Name;
             return chat;
         });
-        return Task.FromResult(new GetAllChatsByUserIdCommandResult(changedUsers));
+        return Task.FromResult(new GetAllChatsByUserIdCommandResult(changedTitles.Convert()));
     }
 }
