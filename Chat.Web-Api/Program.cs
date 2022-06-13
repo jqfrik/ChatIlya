@@ -22,6 +22,7 @@ builder.Services.AddControllers()
 builder.Services.AddSmsAero();
 
 var app = builder.Build();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 using (var serviceScope = app.Services.CreateScope())
 {

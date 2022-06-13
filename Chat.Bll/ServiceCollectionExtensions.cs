@@ -24,7 +24,8 @@ public static class ServiceCollectionExtensions
             Active = user.Active,
             Chats = user?.Chats?.Select(x => x?.Convert())?.ToList(),
             Name = user?.Name,
-            Users = user?.Users?.Select(x => x?.Convert())?.ToList()
+            Users = user?.Users?.Select(x => x?.Convert())?.ToList(),
+            PhotoBase64 = user.PhotoBase64
         };
     }
 
@@ -65,10 +66,9 @@ public static class ServiceCollectionExtensions
         return new Message()
         {
             Id = message?.Id,
-            Deleted = message.Deleted,
-            Edited = message.Edited,
             Text = message?.Text,
-            User = currentUser
+            User = currentUser,
+            CreatedDate = message.CreatedDate
         };
     }
 

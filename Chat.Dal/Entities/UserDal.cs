@@ -19,6 +19,8 @@ public class UserDal
     
     public string? HashPassword { get; set; }
     
+    public string? PhotoBase64 { get; set; }
+    
     public ICollection<UserDal>? Users { get; set; } = new List<UserDal>();
 
     public ICollection<ChatDal>? Chats { get; set; } = new List<ChatDal>();

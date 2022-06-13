@@ -33,7 +33,8 @@ public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand,AddMes
             var newMessage = new MessageDal()
             {
                 User = currentUser,
-                Text = request.Message
+                Text = request.Message,
+                CreatedDate = DateTime.Now
             };
 
             chat.Messages.Add(newMessage);

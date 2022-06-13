@@ -17,7 +17,7 @@ internal sealed class GetAllUsersBySearchStringCommandHandler : IRequestHandler<
             .AsNoTracking()
             .AsEnumerable()
             .Select(user => user.Convert())
-            .Where(user => user.Name != null && user.Name.Contains(request.SearchString,StringComparison.InvariantCultureIgnoreCase))
+            .Where(user => user.Name != null && user.Id != new Guid(request.CurrentUserId) && user.Name.Contains(request.SearchString,StringComparison.InvariantCultureIgnoreCase))
             .ToList();
         return Task.FromResult(new GetAllUsersBySearchStringCommandResult(matchedUsers));
     }

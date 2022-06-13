@@ -9,6 +9,8 @@ public class User
     public bool Active { get; set; }
     
     public string? Email { get; set; }
+    
+    public string? PhotoBase64 { get; set; }
 
     public ICollection<User> Users { get; set; }
     

@@ -104,7 +104,7 @@ public class UsersController : ControllerBase
         {
             return Ok(getUserByIdCommandResult.User);
         }
-        return BadRequest(new { errorText = "Пользователь с таким логином уже" });
+        return BadRequest(new { errorText = "Не найдено пользователя с таким логином" });
     }
 
     [Authorize]
@@ -147,5 +147,12 @@ public class UsersController : ControllerBase
         if (removeFriendCommandResult.Success)
             return Ok(new {success = true});
         return BadRequest(new { errorText = "Не удалось удалить пользователя" });
+    }
+
+    [HttpPost("UploadPhoto")]
+    public async Task<IActionResult> UploadPhoto(UploadPhotoRequest request)
+    {
+        var uploadFileResult = await _mediator.Send(new UploadFileCommand(request.UserId, request.Src));
+        return Ok(new { data = uploadFileResult.Success });
     }
 }
