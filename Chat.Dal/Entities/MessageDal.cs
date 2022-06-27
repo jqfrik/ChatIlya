@@ -9,4 +9,8 @@ public class MessageDal
     public DateTime? CreatedDate { get; set; }
     
     public UserDal User { get; set; }
+    //
+    // public bool IsFile { get; set; }
+    //
+    // public string FilePath { get; set; }
 }

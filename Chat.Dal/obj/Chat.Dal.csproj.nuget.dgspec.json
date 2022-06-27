@@ -68,6 +68,14 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[6.0.4, )"
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
             }
           },
           "imports": [

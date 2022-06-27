@@ -68,3 +68,9 @@ D:\ChatIlya\Chat-Client\obj\Debug\net6.0\refint\Chat-Client.dll
 D:\ChatIlya\Chat-Client\obj\Debug\net6.0\Chat-Client.pdb
 D:\ChatIlya\Chat-Client\obj\Debug\net6.0\Chat-Client.genruntimeconfig.cache
 D:\ChatIlya\Chat-Client\obj\Debug\net6.0\ref\Chat-Client.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\HtmlAgilityPack.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\protobuf-net.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\protobuf-net.Core.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\VkNet.dll
+D:\ChatIlya\Chat-Client\bin\Debug\net6.0\VkNet.AudioBypassService.dll

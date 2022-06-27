@@ -71,6 +71,14 @@
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[7.0.0-preview.3.22175.4, )"
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
             }
           },
           "imports": [
@@ -156,6 +164,14 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[6.0.4, )"
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
             }
           },
           "imports": [
@@ -217,6 +233,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -301,6 +327,14 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
             }
           },
           "imports": [

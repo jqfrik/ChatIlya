@@ -18,6 +18,8 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
+      <PackageReference Include="VkNet" Version="1.69.0" />
+      <PackageReference Include="VkNet.AudioBypassService" Version="1.7.2" />
     </ItemGroup>
 
 </Project>

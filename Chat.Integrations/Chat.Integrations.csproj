@@ -15,4 +15,9 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="VkNet" Version="1.69.0" />
+      <PackageReference Include="VkNet.AudioBypassService" Version="1.7.2" />
+    </ItemGroup>
+
 </Project>

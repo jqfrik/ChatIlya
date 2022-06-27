@@ -10,6 +10,8 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0-preview.3.22178.4" />
+      <PackageReference Include="VkNet" Version="1.69.0" />
+      <PackageReference Include="VkNet.AudioBypassService" Version="1.7.2" />
     </ItemGroup>
 
 </Project>

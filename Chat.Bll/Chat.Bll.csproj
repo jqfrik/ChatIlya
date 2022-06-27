@@ -12,6 +12,8 @@
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.3.22175.4" />
+      <PackageReference Include="VkNet" Version="1.69.0" />
+      <PackageReference Include="VkNet.AudioBypassService" Version="1.7.2" />
     </ItemGroup>
 
     <ItemGroup>

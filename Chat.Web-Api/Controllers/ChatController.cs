@@ -10,6 +10,10 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
+using MediaTypeHeaderValue = System.Net.Http.Headers.MediaTypeHeaderValue;
 
 namespace Chat.Web_Api.Controllers;
 
@@ -89,12 +93,25 @@ public class ChatController : ControllerBase
         return Ok(allChatsCommandResult.Chats);
     }
 
-    // [AllowAnonymous]
-    // [HttpGet("AddMessage")]
-    // public async Task<IActionResult> AddMessage()
-    // {
-    //     var addMessageCommandResult =
-    //         await _mediator.Send(new AddMessageCommand(new Guid("d64c734c-1a2d-4625-b2f9-b8d4db3f20a9"), new Guid("57f0538b-5785-4721-a851-8d4c7c9e2d5b"), "новое сообщение", _chatHub.Clients));
-    //     return Ok();
-    // }
+    [Authorize]
+    [HttpPost("SendAttachments")]
+    public async Task<IActionResult> SendAttachments()
+    {
+        var reader = new MultipartReader("", Request.Body);
+        var section = await reader.ReadNextSectionAsync();
+        while (section != null)
+        {
+            var stream = section.Body;
+            var contentDisposition = section.ContentDisposition;
+            if (contentDisposition.Contains("file"))
+            {
+                var fileName = Guid.NewGuid().ToString();
+                using var newStream = new FileStream(fileName,FileMode.OpenOrCreate);
+                await stream.CopyToAsync(newStream);
+            } 
+            section = await reader.ReadNextSectionAsync();
+        }
+
+        return Ok();
+    }
 }

@@ -48,6 +48,14 @@
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
               "version": "[7.0.0-preview.3.22178.4, )"
+            },
+            "VkNet": {
+              "target": "Package",
+              "version": "[1.69.0, )"
+            },
+            "VkNet.AudioBypassService": {
+              "target": "Package",
+              "version": "[1.7.2, )"
             }
           },
           "imports": [

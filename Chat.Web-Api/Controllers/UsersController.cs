@@ -155,4 +155,18 @@ public class UsersController : ControllerBase
         var uploadFileResult = await _mediator.Send(new UploadFileCommand(request.UserId, request.Src));
         return Ok(new { data = uploadFileResult.Success });
     }
+
+    [Authorize]
+    [HttpPost("SetStatus")]
+    public async Task<IActionResult> SetStatus(SetStatusRequest request)
+    {
+        var currentUserId = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "GUID")?.Value;
+        var setStatusResult = await _mediator.Send(new SetStatusCommand(currentUserId, request.Active));
+        if (setStatusResult.Success)
+        {
+            return Ok(new { data = true});
+        }
+
+        return BadRequest(new { errorText = "Не удалось установить статус" });
+    }
 }
