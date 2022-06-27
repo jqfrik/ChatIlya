@@ -10,6 +10,6 @@ internal sealed class SendAttachments : IRequestHandler<SendAttachmentsCommand,S
 {
     public Task<SendAttachmentsCommandResult> Handle(SendAttachmentsCommand request, CancellationToken cancellationToken)
     {
-        
+        return Task.FromResult(new SendAttachmentsCommandResult());
     }
 }
